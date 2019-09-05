@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.fragment_login.view.*
 
 
 class LoginFragment : Fragment() {
@@ -22,7 +24,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun onActionPerform() {
+        rootView.fabNext.setOnClickListener {
+            (it as FloatingActionButton).hide()
 
+        }
     }
 
 

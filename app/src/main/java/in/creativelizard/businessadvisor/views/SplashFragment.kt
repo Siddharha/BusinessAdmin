@@ -36,7 +36,7 @@ class SplashFragment : Fragment() {
 
         Handler().postDelayed({
             splashViewModel.isSplashLaded.value = true
-        },1000)
+        },5000)
 
         splashViewModel.getSplashLoadStatus().observe(this, Observer {
             if(it){
