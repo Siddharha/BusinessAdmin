@@ -57,10 +57,11 @@ class FormFragment : Fragment() {
         loadFragment(personalFragment,"Personal Details")
     }
 
-    fun loadFragment(fragment: Fragment,title:String){
+    private fun loadFragment(fragment: Fragment, title:String){
         mToolbar.title = title
         val transaction = activity!!.supportFragmentManager.beginTransaction()
         transaction.replace(rootView.flContainer.id, fragment)
+        transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
         transaction.addToBackStack(null)
 
         transaction.commit()
