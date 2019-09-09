@@ -34,6 +34,9 @@ class BusinessFragment : Fragment() {
         rootView.tvOpenTime.setOnClickListener {
             AppUtils.getTime(it)
         }
+        rootView.tvCloseTime.setOnClickListener {
+            AppUtils.getTime(it)
+        }
     }
 
 
