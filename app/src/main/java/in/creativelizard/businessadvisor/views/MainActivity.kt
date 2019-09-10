@@ -15,5 +15,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initialize() {
+
     }
 }
