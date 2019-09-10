@@ -1,12 +1,9 @@
 package `in`.creativelizard.businessadvisor.views.utils
 
 import android.app.TimePickerDialog
-import android.content.Context
 import android.view.View
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AppUtils {
     companion object{
