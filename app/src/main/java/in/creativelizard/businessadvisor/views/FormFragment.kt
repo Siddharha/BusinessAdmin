@@ -2,7 +2,6 @@ package `in`.creativelizard.businessadvisor.views
 
 
 import `in`.creativelizard.businessadvisor.R
-import `in`.creativelizard.businessadvisor.views.utils.AppUtils
 import `in`.creativelizard.businessadvisor.views.utils.ToolsFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -54,15 +53,21 @@ class FormFragment : Fragment() {
         personalFragment = PersonalFragment()
         businessFragment = BusinessFragment()
         toolsFragment = ToolsFragment()
-        loadFragment(personalFragment,"Personal Details")
+        //loadDefault fragment
+        mToolbar.title = "Personal Details"
+        val transaction = activity!!.supportFragmentManager.beginTransaction()
+        transaction.replace(rootView.flContainer.id, personalFragment)
+
+        transaction.commit()
+
     }
 
     private fun loadFragment(fragment: Fragment, title:String){
         mToolbar.title = title
         val transaction = activity!!.supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left)
         transaction.replace(rootView.flContainer.id, fragment)
-        transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-        transaction.addToBackStack(null)
+        //transaction.addToBackStack(null)
 
         transaction.commit()
     }
