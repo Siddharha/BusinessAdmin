@@ -34,15 +34,18 @@ class FormFragment : Fragment() {
             when(it.itemId){
                 R.id.mnuPersonal ->  {
                     // mnuNavController.navigate(R.id.allFeedsFragment)
+                    try{
                     loadFragment(personalFragment,"Personal Details")
-                    true}
+                    true}catch (e:Exception){return@setOnNavigationItemSelectedListener false}}
                 R.id.mnuBusness ->  {
                     //   mnuNavController.navigate(R.id.courcesFragment)
+                    try{
                     loadFragment(businessFragment,"Business Details")
-                    true}
+                    true}catch (e:Exception){return@setOnNavigationItemSelectedListener false}}
                 R.id.mnuTools ->  {
+                    try{
                     loadFragment(toolsFragment,"Tools")
-                    true}
+                        true}catch (e:Exception){return@setOnNavigationItemSelectedListener false}}
                 else -> false
             }
         }
@@ -63,13 +66,18 @@ class FormFragment : Fragment() {
     }
 
     private fun loadFragment(fragment: Fragment, title:String){
-        mToolbar.title = title
-        val transaction = activity!!.supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left)
-        transaction.replace(rootView.flContainer.id, fragment)
-        //transaction.addToBackStack(null)
+        try {
+            mToolbar.title = title
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
+            transaction?.addToBackStack(null)
+            transaction?.replace(rootView.flContainer.id, fragment)
+            //transaction.addToBackStack(null)
 
-        transaction.commit()
+            transaction?.commit()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
 
