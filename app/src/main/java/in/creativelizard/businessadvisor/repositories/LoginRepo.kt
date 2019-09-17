@@ -22,7 +22,8 @@ class LoginRepo {
         }
     }
 
-    var getLoginDetails : (String)-> MutableLiveData<String> = {
+
+     var getLoginDetails : (String)-> MutableLiveData<String> = {
         val data = MutableLiveData<String>()
        /* val data = MutableLiveData<Any>()
         data.value = callLoginAPI()

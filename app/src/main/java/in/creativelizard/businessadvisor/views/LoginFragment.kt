@@ -63,9 +63,9 @@ class LoginFragment : Fragment() {
 
             loginViewModel.getLoginWithToken(rootView.etTokenId.text.toString()).observe(this,
                 Observer {response ->
-                    //Toast.makeText(activity!!,Gson().toJson(it),Toast.LENGTH_SHORT).show()
+
                     val loginData = Gson().fromJson(response,LoginOutput::class.java)
-                    if(loginData.success == 1){
+                    if(loginData.success == 0){
                         Handler().postDelayed({
                             Navigation.findNavController(rootView).navigate(R.id.action_loginFragment_to_formFragment)
                         },1000)
@@ -74,7 +74,6 @@ class LoginFragment : Fragment() {
                         Toast.makeText(activity!!,loginData.message,Toast.LENGTH_SHORT).show()
                     }
                 })
-           // callLogin()
 
 
         }

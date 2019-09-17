@@ -14,5 +14,5 @@ import retrofit2.Response
 class LoginViewModel : ViewModel() {
     private val  loginRepo:LoginRepo = LoginRepo.getInstance()
 
-     val getLoginWithToken:(String) -> MutableLiveData<String> = {loginRepo.getLoginDetails(it)}
+    val getLoginWithToken:(String) -> MutableLiveData<String> = {loginRepo.getLoginDetails(it)}
 }
