@@ -2,6 +2,8 @@ package `in`.creativelizard.businessadvisor.views
 
 
 import `in`.creativelizard.businessadvisor.R
+import `in`.creativelizard.businessadvisor.viewModels.BottomSheetViewModel
+import `in`.creativelizard.businessadvisor.views.utils.AppUtils
 import android.animation.Animator
 import android.app.Activity
 import android.graphics.Bitmap
@@ -12,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -23,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_personal.view.*
 
 class PersonalFragment : Fragment() {
     lateinit var rootView:View
-
+    lateinit var bottomSheetViewModel: BottomSheetViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,10 +34,18 @@ class PersonalFragment : Fragment() {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_personal, container, false)
         initialize()
+        onActionPerform()
         return rootView
     }
 
+    private fun onActionPerform() {
+        rootView.fabProfileImg.setOnClickListener {
+            AppUtils.profileTypeChooserPopup(activity!!,bottomSheetViewModel)
+        }
+    }
+
     private fun initialize() {
+        bottomSheetViewModel = ViewModelProviders.of(this).get(BottomSheetViewModel::class.java)
         rootView.imgLogo.scaleX = 0f
         rootView.imgLogo.scaleY = 0f
         rootView.imgBanner.translationY = - resources.displayMetrics.heightPixels.toFloat()/3
