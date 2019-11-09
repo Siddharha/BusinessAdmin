@@ -8,6 +8,9 @@
               android:label="fragment_splash" tools:layout="@layout/fragment_splash">
         <action android:id="@+id/action_splashFragment_to_loginFragment" app:destination="@id/loginFragment"
                 app:popUpToInclusive="true"/>
+        <action
+                android:id="@+id/action_splashFragment_to_formFragment"
+                app:destination="@id/formFragment" />
     </fragment>
     <fragment android:id="@+id/loginFragment" android:name="in.creativelizard.businessadvisor.views.LoginFragment"
               android:label="fragment_login" tools:layout="@layout/fragment_login">

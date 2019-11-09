@@ -2,6 +2,9 @@ package `in`.creativelizard.businessadvisor.views
 
 
 import `in`.creativelizard.businessadvisor.R
+import `in`.creativelizard.businessadvisor.adapters.CategorySpinnerAdapter
+import `in`.creativelizard.businessadvisor.models.networkModels.CategoryArray
+import `in`.creativelizard.businessadvisor.viewModels.BusinessPageViewModel
 import `in`.creativelizard.businessadvisor.views.utils.AppUtils
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,12 +13,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_business.view.*
 
 
 class BusinessFragment : Fragment() {
 
     lateinit var rootView:View
+    lateinit var businessTypeListAdapter:CategorySpinnerAdapter
+    lateinit var businessPageViewModel: BusinessPageViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +36,9 @@ class BusinessFragment : Fragment() {
     }
 
     private fun initialize() {
+        businessPageViewModel = ViewModelProviders.of(this).get(BusinessPageViewModel::class.java)
+        businessTypeListAdapter = CategorySpinnerAdapter(activity!!,R.layout.category_cell,businessPageViewModel.getBusinessTypeList().value!!)
+        rootView.spinner.adapter = businessTypeListAdapter
         rootView.clBusiness.translationX =  resources.displayMetrics.widthPixels.toFloat()
 
         Handler().postDelayed({

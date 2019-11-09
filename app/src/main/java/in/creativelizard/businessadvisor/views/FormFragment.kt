@@ -49,12 +49,14 @@ class FormFragment : Fragment() {
     }
 
     private fun initialize() {
+        setHasOptionsMenu(true)
         mToolbar = rootView.toolbar as Toolbar
         personalFragment = PersonalFragment()
         businessFragment = BusinessFragment()
         toolsFragment = ToolsFragment()
         //loadDefault fragment
         mToolbar.title = "Personal Details"
+        (context as MainActivity).setSupportActionBar(mToolbar)
         val transaction = activity!!.supportFragmentManager.beginTransaction()
         transaction.replace(rootView.flContainer.id, personalFragment)
 
