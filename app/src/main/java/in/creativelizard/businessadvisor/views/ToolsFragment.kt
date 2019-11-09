@@ -1,4 +1,4 @@
-package `in`.creativelizard.businessadvisor.views.utils
+package `in`.creativelizard.businessadvisor.views
 
 
 import android.os.Bundle

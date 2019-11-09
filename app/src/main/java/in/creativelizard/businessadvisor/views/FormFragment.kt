@@ -2,7 +2,6 @@ package `in`.creativelizard.businessadvisor.views
 
 
 import `in`.creativelizard.businessadvisor.R
-import `in`.creativelizard.businessadvisor.views.utils.ToolsFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
