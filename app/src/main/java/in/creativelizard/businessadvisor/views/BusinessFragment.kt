@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_business.view.*
 
@@ -49,6 +50,11 @@ class BusinessFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun onActionPerform() {
+        businessPageViewModel.getBusinessTypeList().observe(this, Observer {
+            if(it.isNotEmpty()){
+                businessTypeListAdapter.notifyDataSetChanged()
+            }
+        })
         rootView.tvOpenTime.setOnClickListener {
             AppUtils.getTime(it)
         }
