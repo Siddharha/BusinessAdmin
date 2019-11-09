@@ -3,10 +3,8 @@ package `in`.creativelizard.businessadvisor.views
 
 import `in`.creativelizard.businessadvisor.R
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import kotlinx.android.synthetic.main.fragment_form.view.*
 
@@ -77,6 +75,11 @@ class FormFragment : Fragment() {
         }catch (e:Exception){
             e.printStackTrace()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 

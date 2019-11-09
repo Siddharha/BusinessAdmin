@@ -5,5 +5,8 @@ class Constant {
         const val BASE_URL = "https://creativelizard.in/api/"
 
         const val LOG_IN = "getLogIn"
+
+        //------Pref Const------//
+        const val USER_TOKEN = "user_token"
     }
 }

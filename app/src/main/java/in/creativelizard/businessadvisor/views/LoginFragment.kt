@@ -3,7 +3,9 @@ package `in`.creativelizard.businessadvisor.views
 
 import `in`.creativelizard.businessadvisor.R
 import `in`.creativelizard.businessadvisor.models.networkModels.LoginOutput
+import `in`.creativelizard.businessadvisor.utils.Constant
 import `in`.creativelizard.businessadvisor.viewModels.LoginViewModel
+import `in`.creativelizard.businessadvisor.views.utils.Pref
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -26,6 +28,7 @@ class LoginFragment : Fragment() {
 
     lateinit var rootView: View
     lateinit var loginViewModel: LoginViewModel
+    lateinit var pref:Pref
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +40,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun initialize() {
+        pref = Pref(activity!!)
+        rootView.etTokenId.setText(pref.getSession(Constant.USER_TOKEN))
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
     }
@@ -65,7 +70,8 @@ class LoginFragment : Fragment() {
                 Observer {response ->
 
                     val loginData = Gson().fromJson(response,LoginOutput::class.java)
-                    if(loginData.success == 0){
+                    if(loginData.success == 1){
+                        pref.setSession(Constant.USER_TOKEN,rootView.etTokenId.text.toString())
                         Handler().postDelayed({
                             Navigation.findNavController(rootView).navigate(R.id.action_loginFragment_to_formFragment)
                         },1000)
