@@ -7,4 +7,14 @@
             android:icon="@drawable/ic_settings_black"
             android:title="Settings"
             app:showAsAction="always" />
+    <item
+            android:icon="@drawable/ic_file_upload"
+            android:title="Upload"
+            android:visible="false"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/mnuDone"
+            android:icon="@drawable/ic_done"
+            android:title="Done"
+            app:showAsAction="always" />
 </menu>

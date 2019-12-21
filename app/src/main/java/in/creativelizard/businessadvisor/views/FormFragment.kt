@@ -4,6 +4,7 @@ package `in`.creativelizard.businessadvisor.views
 import `in`.creativelizard.businessadvisor.R
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.Toolbar
 import kotlinx.android.synthetic.main.fragment_form.view.*
@@ -82,6 +83,17 @@ class FormFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.toolbar_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.mnuDone -> callCreateBusinessAPI()
+        }
+        return false
+    }
+
+    private fun callCreateBusinessAPI() {
+        Toast.makeText(activity!!,"Not Implemented!",Toast.LENGTH_SHORT).show()
     }
 
 
