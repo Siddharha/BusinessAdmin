@@ -72,6 +72,7 @@ class LoginFragment : Fragment() {
                     val loginData = Gson().fromJson(response,LoginOutput::class.java)
                     if(loginData.success == 1){
                         pref.setSession(Constant.USER_TOKEN,rootView.etTokenId.text.toString())
+                        pref.setSession(Constant.USER_ID,loginData.user.id)
                         Handler().postDelayed({
                             Navigation.findNavController(rootView).navigate(R.id.action_loginFragment_to_formFragment)
                         },1000)
