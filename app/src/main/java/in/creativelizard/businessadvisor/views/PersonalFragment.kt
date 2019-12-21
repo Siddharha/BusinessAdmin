@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
@@ -42,6 +43,29 @@ class PersonalFragment : Fragment() {
         rootView.fabProfileImg.setOnClickListener {
             AppUtils.profileTypeChooserPopup(activity!!,bottomSheetViewModel)
         }
+        rootView.etPhone.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if(!hasFocus && (v as EditText).length() >0){
+                    (context as MainActivity).businessProfileinp.number = v.text.toString()
+                }
+
+            }
+
+        rootView.etEmail.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if(!hasFocus && (v as EditText).length() >0){
+                    (context as MainActivity).businessProfileinp.email = v.text.toString()
+                }
+
+            }
+
+        rootView.etWebsite.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if(!hasFocus && (v as EditText).length() >0){
+                    (context as MainActivity).businessProfileinp.web_address = v.text.toString()
+                }
+
+            }
     }
 
     private fun initialize() {

@@ -13,8 +13,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.SpinnerAdapter
+import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_business.view.*
@@ -61,6 +64,56 @@ class BusinessFragment : Fragment() {
         rootView.tvCloseTime.setOnClickListener {
             AppUtils.getTime(it)
         }
+
+        rootView.etTitle.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if(!hasFocus && (v as EditText).length() >0){
+                    (context as MainActivity).businessProfileinp.title = v.text.toString()
+                }
+
+            }
+
+       /* rootView.etShDesc.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if(!hasFocus && (v as EditText).length() >0){
+                    (context as MainActivity).businessProfileinp.description = v.text.toString()
+                }
+
+            }*/
+
+        rootView.etLnDesc.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if(!hasFocus && (v as EditText).length() >0){
+                    (context as MainActivity).businessProfileinp.description = v.text.toString()
+                }
+
+            }
+
+        rootView.etAddress.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if(!hasFocus && (v as EditText).length() >0){
+                    (context as MainActivity).businessProfileinp.addresses = v.text.toString()
+                }
+
+            }
+
+        rootView.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                (context as MainActivity).businessProfileinp.type =parent?.selectedItem.toString()
+            }
+
+        }
+
+        //etAddress
     }
 
 

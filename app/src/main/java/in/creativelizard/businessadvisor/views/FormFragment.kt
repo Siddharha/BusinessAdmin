@@ -2,6 +2,8 @@ package `in`.creativelizard.businessadvisor.views
 
 
 import `in`.creativelizard.businessadvisor.R
+import `in`.creativelizard.businessadvisor.models.networkModels.BusinessProfileInput
+import `in`.creativelizard.businessadvisor.models.networkModels.BusinessProfileOutput
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -93,7 +95,8 @@ class FormFragment : Fragment() {
     }
 
     private fun callCreateBusinessAPI() {
-        Toast.makeText(activity!!,"Not Implemented!",Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity!!,"number: ${(context as MainActivity).businessProfileinp.number}",Toast.LENGTH_SHORT).show()
+
     }
 
 
