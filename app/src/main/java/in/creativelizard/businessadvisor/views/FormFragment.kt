@@ -5,8 +5,11 @@ import `in`.creativelizard.businessadvisor.R
 import `in`.creativelizard.businessadvisor.models.CreateBusinessInput
 import `in`.creativelizard.businessadvisor.models.networkModels.BusinessProfileInput
 import `in`.creativelizard.businessadvisor.models.networkModels.BusinessProfileOutput
+import `in`.creativelizard.businessadvisor.utils.Constant
 import `in`.creativelizard.businessadvisor.viewModels.FromPageViewModel
+import `in`.creativelizard.businessadvisor.views.utils.Pref
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -25,14 +28,20 @@ class FormFragment : Fragment() {
     lateinit var fromPageViewModel:FromPageViewModel
     lateinit var toolsFragment: ToolsFragment
     lateinit var mToolbar:Toolbar
+    lateinit var _pref:Pref
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_form, container, false)
         initialize()
+        loadData()
         onActionPerform()
         return rootView
+    }
+
+    private fun loadData() {
+        Log.e("response",_pref.getSession(Constant.USER_ID))
     }
 
     private fun onActionPerform() {
@@ -59,6 +68,7 @@ class FormFragment : Fragment() {
 
     private fun initialize() {
         setHasOptionsMenu(true)
+        _pref = Pref(activity!!)
         mToolbar = rootView.toolbar as Toolbar
         personalFragment = PersonalFragment()
         businessFragment = BusinessFragment()
