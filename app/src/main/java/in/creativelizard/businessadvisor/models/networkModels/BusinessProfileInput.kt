@@ -2,7 +2,7 @@ package `in`.creativelizard.businessadvisor.models.networkModels
 
  class BusinessProfileInput {
      var addresses: String = ""
-     val close_time: String = ""
+     var close_time: String = ""
      var description: String = ""
      var email: String = ""
      val lat_location: Double = 0.0

@@ -52,10 +52,21 @@ class FormFragment : Fragment() {
                 itm.email = it.business_card.email
                 itm.web_address = it.business_card.web_address
                 itm.open_time = it.business_card.open_time
+                itm.close_time = it.business_card.close_time
+                itm.description = it.business_card.description
+                itm.addresses = it.business_card.addresses
 
-                personalFragment.rootView.etPhone.setText(itm.number)
-                personalFragment.rootView.etEmail.setText(itm.email)
-                personalFragment.rootView.etWebsite.setText(itm.web_address)
+                try {
+                    personalFragment.rootView.etPhone.setText(itm.number)
+                    personalFragment.rootView.etEmail.setText(itm.email)
+                    personalFragment.rootView.etWebsite.setText(itm.web_address)
+
+                    businessFragment.rootView.etTitle.setText(itm.title)
+                    businessFragment.rootView.tvOpenTime.text = itm.open_time
+                    businessFragment.rootView.tvCloseTime.text = itm.close_time
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
             }
         })
     }
@@ -110,18 +121,6 @@ class FormFragment : Fragment() {
             //transaction.addToBackStack(null)
 
             transaction?.commit()
-        }catch (e:Exception){
-            e.printStackTrace()
-        }
-
-        try {
-            val itm = (context as MainActivity).businessProfileinp
-            personalFragment.rootView.etPhone.setText(itm.number)
-            personalFragment.rootView.etEmail.setText(itm.email)
-            personalFragment.rootView.etWebsite.setText(itm.web_address)
-
-            businessFragment.rootView.etTitle.setText(itm.title)
-            businessFragment.rootView.tvOpenTime.text = itm.open_time
         }catch (e:Exception){
             e.printStackTrace()
         }
