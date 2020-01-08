@@ -121,6 +121,20 @@ class FormFragment : Fragment() {
             //transaction.addToBackStack(null)
 
             transaction?.commit()
+
+            try {
+                val itm = (context as MainActivity).businessProfileinp
+
+                personalFragment.rootView.etPhone.setText(itm.number)
+                personalFragment.rootView.etEmail.setText(itm.email)
+                personalFragment.rootView.etWebsite.setText(itm.web_address)
+
+                businessFragment.rootView.etTitle.setText(itm.title)
+                businessFragment.rootView.tvOpenTime.text = itm.open_time
+                businessFragment.rootView.tvCloseTime.text = itm.close_time
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
         }catch (e:Exception){
             e.printStackTrace()
         }
