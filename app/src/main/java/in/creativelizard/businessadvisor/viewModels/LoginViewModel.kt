@@ -13,6 +13,14 @@ import retrofit2.Response
 
 class LoginViewModel : ViewModel() {
     private val  loginRepo:LoginRepo = LoginRepo.getInstance()
+    private val detectedQR:MutableLiveData<String> = MutableLiveData()
 
     val getLoginWithToken:(String) -> MutableLiveData<String> = {loginRepo.getLoginDetails(it)}
+    val onQRDetected: () -> LiveData<String> = {
+        detectedQR
+    }
+
+    val setQRForResult: (String) -> Unit = {
+        detectedQR.value = it
+    }
 }

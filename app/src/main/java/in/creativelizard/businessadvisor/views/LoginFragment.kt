@@ -4,8 +4,10 @@ package `in`.creativelizard.businessadvisor.views
 import `in`.creativelizard.businessadvisor.R
 import `in`.creativelizard.businessadvisor.models.networkModels.LoginOutput
 import `in`.creativelizard.businessadvisor.utils.Constant
+import `in`.creativelizard.businessadvisor.utils.CustomScannerActivity
 import `in`.creativelizard.businessadvisor.viewModels.LoginViewModel
 import `in`.creativelizard.businessadvisor.views.utils.Pref
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -20,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
+import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import java.nio.file.WatchEvent
 
@@ -29,6 +32,7 @@ class LoginFragment : Fragment() {
     lateinit var rootView: View
     lateinit var loginViewModel: LoginViewModel
     lateinit var pref:Pref
+    private var intentIntg: IntentIntegrator? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,8 +45,9 @@ class LoginFragment : Fragment() {
 
     private fun initialize() {
         pref = Pref(activity!!)
+        intentIntg = IntentIntegrator(activity)
         rootView.etTokenId.setText(pref.getSession(Constant.USER_TOKEN))
-        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        loginViewModel = /*ViewModelProviders.of(this).get(LoginViewModel::class.java)*/(context as MainActivity).loginViewModel
 
     }
 
@@ -82,9 +87,29 @@ class LoginFragment : Fragment() {
                     }
                 })
 
+            loginViewModel.onQRDetected().observe(this, Observer {
+                rootView.etTokenId.setText(it)
+            })
+
 
         }
+
+        rootView.imgQR.setOnClickListener {
+            startScan()
+        }
     }
+
+
+    fun startScan() {
+
+        intentIntg?.setBeepEnabled(true)
+        intentIntg?.setOrientationLocked(false)?.captureActivity = CustomScannerActivity::class.java
+        intentIntg?.setBarcodeImageEnabled(true)
+        intentIntg?.initiateScan()
+        //FLAG_FOR_RESULT = 0
+    }
+
+
 
 
 }
