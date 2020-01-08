@@ -3,8 +3,7 @@ package `in`.creativelizard.businessadvisor.views
 
 import `in`.creativelizard.businessadvisor.R
 import `in`.creativelizard.businessadvisor.models.CreateBusinessInput
-import `in`.creativelizard.businessadvisor.models.networkModels.BusinessProfileInput
-import `in`.creativelizard.businessadvisor.models.networkModels.BusinessProfileOutput
+import `in`.creativelizard.businessadvisor.models.GetBusinessInput
 import `in`.creativelizard.businessadvisor.utils.Constant
 import `in`.creativelizard.businessadvisor.viewModels.FromPageViewModel
 import `in`.creativelizard.businessadvisor.views.utils.Pref
@@ -16,8 +15,9 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_business.view.*
 import kotlinx.android.synthetic.main.fragment_form.view.*
+import kotlinx.android.synthetic.main.fragment_personal.view.*
 
 
 class FormFragment : Fragment() {
@@ -42,6 +42,22 @@ class FormFragment : Fragment() {
 
     private fun loadData() {
         Log.e("response",_pref.getSession(Constant.USER_ID))
+        val businessInp = GetBusinessInput(_pref.getSession(Constant.USER_ID).toInt())
+        fromPageViewModel.getBusiness(businessInp).observe(this, Observer {
+            if(it.success == 1){
+                val itm = (context as MainActivity).businessProfileinp
+                itm.addresses = it.business_card.addresses
+                itm.title = it.business_card.title
+                itm.number = it.business_card.number
+                itm.email = it.business_card.email
+                itm.web_address = it.business_card.web_address
+                itm.open_time = it.business_card.open_time
+
+                personalFragment.rootView.etPhone.setText(itm.number)
+                personalFragment.rootView.etEmail.setText(itm.email)
+                personalFragment.rootView.etWebsite.setText(itm.web_address)
+            }
+        })
     }
 
     private fun onActionPerform() {
@@ -97,6 +113,18 @@ class FormFragment : Fragment() {
         }catch (e:Exception){
             e.printStackTrace()
         }
+
+        try {
+            val itm = (context as MainActivity).businessProfileinp
+            personalFragment.rootView.etPhone.setText(itm.number)
+            personalFragment.rootView.etEmail.setText(itm.email)
+            personalFragment.rootView.etWebsite.setText(itm.web_address)
+
+            businessFragment.rootView.etTitle.setText(itm.title)
+            businessFragment.rootView.tvOpenTime.text = itm.open_time
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -116,7 +144,7 @@ class FormFragment : Fragment() {
         val itm = (context as MainActivity).businessProfileinp
         val inp = CreateBusinessInput(itm.addresses,itm.close_time,itm.description,itm.email,itm.lat_location,
             itm.lon_location,itm.number,itm.open_time,itm.title,itm.type,itm.uder_id,itm.web_address)
-        fromPageViewModel.getBusiness(inp).observe(this, Observer {
+        fromPageViewModel.createBusiness(inp).observe(this, Observer {
             if(it.success == 1){
                 Toast.makeText(activity!!,it.message,Toast.LENGTH_SHORT).show()
             }

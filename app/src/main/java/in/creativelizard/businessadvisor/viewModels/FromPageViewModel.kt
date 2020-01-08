@@ -3,8 +3,10 @@ package `in`.creativelizard.businessadvisor.viewModels
 import `in`.creativelizard.businessadvisor.interfaces.ApiInterface
 import `in`.creativelizard.businessadvisor.models.CreateBusinessInput
 import `in`.creativelizard.businessadvisor.models.CreateBusinessProfileResponseOutput
+import `in`.creativelizard.businessadvisor.models.GetBusinessInput
 import `in`.creativelizard.businessadvisor.models.networkModels.BusinessTypeListOutput
 import `in`.creativelizard.businessadvisor.models.networkModels.CategoryArray
+import `in`.creativelizard.businessadvisor.models.networkModels.GetBusinessOutput
 import `in`.creativelizard.businessadvisor.models.networkModels.LoginInput
 import `in`.creativelizard.businessadvisor.repositories.BusinessPageRepo
 import `in`.creativelizard.businessadvisor.repositories.FormRepo
@@ -20,5 +22,8 @@ import retrofit2.Response
 class FromPageViewModel : ViewModel() {
     private val  formRepo: FormRepo = FormRepo.getInstance()
 
-    val getBusiness:(CreateBusinessInput) -> MutableLiveData<CreateBusinessProfileResponseOutput> = {formRepo.createBusiness(it)}
+    val createBusiness:(CreateBusinessInput) -> MutableLiveData<CreateBusinessProfileResponseOutput> = {formRepo.createBusiness(it)}
+    val getBusiness:(GetBusinessInput) ->MutableLiveData<GetBusinessOutput> = {
+        formRepo.getBusinessData(it)
+    }
 }

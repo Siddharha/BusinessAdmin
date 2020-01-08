@@ -8,7 +8,7 @@ package `in`.creativelizard.businessadvisor.models.networkModels
      val lat_location: Double = 0.0
      val lon_location: Double = 0.0
      var number: String = ""
-     val open_time: String = ""
+     var open_time: String = ""
      var title: String = ""
      var type: String = ""
      val uder_id: Int = 0

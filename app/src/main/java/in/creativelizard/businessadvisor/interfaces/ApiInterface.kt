@@ -2,7 +2,9 @@ package `in`.creativelizard.businessadvisor.interfaces
 
 import `in`.creativelizard.businessadvisor.models.CreateBusinessInput
 import `in`.creativelizard.businessadvisor.models.CreateBusinessProfileResponseOutput
+import `in`.creativelizard.businessadvisor.models.GetBusinessInput
 import `in`.creativelizard.businessadvisor.models.networkModels.BusinessTypeListOutput
+import `in`.creativelizard.businessadvisor.models.networkModels.GetBusinessOutput
 import `in`.creativelizard.businessadvisor.models.networkModels.LoginInput
 import `in`.creativelizard.businessadvisor.utils.Constant
 import retrofit2.Call
@@ -24,4 +26,6 @@ interface ApiInterface {
     @POST(Constant.CREATE_BUSINESS_PROFILE)
     fun createBusinessProfile(@Body createBusinessInput: CreateBusinessInput): Call<CreateBusinessProfileResponseOutput>
 
+    @POST(Constant.GET_BUSINESS_DATA)
+    fun getBusinessData(@Body businessDataInp: GetBusinessInput): Call<GetBusinessOutput>
 }

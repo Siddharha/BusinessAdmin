@@ -3,6 +3,8 @@ package `in`.creativelizard.businessadvisor.repositories
 import `in`.creativelizard.businessadvisor.interfaces.ApiInterface
 import `in`.creativelizard.businessadvisor.models.CreateBusinessInput
 import `in`.creativelizard.businessadvisor.models.CreateBusinessProfileResponseOutput
+import `in`.creativelizard.businessadvisor.models.GetBusinessInput
+import `in`.creativelizard.businessadvisor.models.networkModels.GetBusinessOutput
 import `in`.creativelizard.businessadvisor.models.networkModels.LoginInput
 import `in`.creativelizard.businessadvisor.views.utils.ApiClient
 import androidx.lifecycle.MutableLiveData
@@ -50,6 +52,30 @@ class FormRepo {
 
     }
 
+    var getBusinessData : (GetBusinessInput)-> MutableLiveData<GetBusinessOutput> = {
+        val data = MutableLiveData<GetBusinessOutput>()
+        /* val data = MutableLiveData<Any>()
+         data.value = callLoginAPI()
+         data*/
+
+        val apiClient = ApiClient().getClient().create(ApiInterface::class.java)
+        val call = apiClient.getBusinessData(it)
+
+        call.enqueue(object : retrofit2.Callback<GetBusinessOutput> {
+            override fun onFailure(call: Call<GetBusinessOutput>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(call: Call<GetBusinessOutput>, response: Response<GetBusinessOutput>) {
+                val jString =  Gson().toJson(response.body())
+                print(jString)
+                data.value = response.body()
+            }
+        })
+
+        data
+
+    }
    /* private fun callLoginAPI(token:String): Any? {
 
     }*/

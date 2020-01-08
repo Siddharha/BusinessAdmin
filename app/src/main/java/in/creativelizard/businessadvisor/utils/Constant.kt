@@ -7,6 +7,7 @@ class Constant {
         const val LOG_IN = "getLogIn"
         const val BUSINESS_TYPE_LIST = "getCategoryList"
         const val CREATE_BUSINESS_PROFILE = "createBusinessProfile"
+        const val GET_BUSINESS_DATA = "getBusinessByUser"
 
         //------Pref Const------//
         const val USER_TOKEN = "user_token"
