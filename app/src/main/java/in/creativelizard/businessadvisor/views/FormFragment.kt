@@ -7,6 +7,7 @@ import `in`.creativelizard.businessadvisor.models.GetBusinessInput
 import `in`.creativelizard.businessadvisor.utils.Constant
 import `in`.creativelizard.businessadvisor.viewModels.FromPageViewModel
 import `in`.creativelizard.businessadvisor.views.utils.Pref
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -148,8 +149,13 @@ class FormFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.mnuDone -> callCreateBusinessAPI()
+            R.id.mnuSettings -> openSettings()
         }
         return false
+    }
+
+    private fun openSettings() {
+       startActivity(Intent(activity!!,SettingsActivity::class.java))
     }
 
     private fun callCreateBusinessAPI() {

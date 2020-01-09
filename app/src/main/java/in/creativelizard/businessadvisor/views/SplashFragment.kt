@@ -5,12 +5,15 @@ import `in`.creativelizard.businessadvisor.R
 import `in`.creativelizard.businessadvisor.utils.Constant
 import `in`.creativelizard.businessadvisor.viewModels.SplashViewModel
 import `in`.creativelizard.businessadvisor.views.utils.Pref
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -58,6 +61,8 @@ class SplashFragment : Fragment() {
         })
 
     }
+
+
 
 
 }
