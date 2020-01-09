@@ -9,6 +9,7 @@ import `in`.creativelizard.businessadvisor.viewModels.FromPageViewModel
 import `in`.creativelizard.businessadvisor.views.utils.Pref
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -56,19 +57,23 @@ class FormFragment : Fragment() {
                 itm.close_time = it.business_card.close_time
                 itm.description = it.business_card.description
                 itm.addresses = it.business_card.addresses
-
-                try {
-                    personalFragment.rootView.etPhone.setText(itm.number)
-                    personalFragment.rootView.etEmail.setText(itm.email)
-                    personalFragment.rootView.etWebsite.setText(itm.web_address)
-
-                    businessFragment.rootView.etTitle.setText(itm.title)
-                    businessFragment.rootView.tvOpenTime.text = itm.open_time
-                    businessFragment.rootView.tvCloseTime.text = itm.close_time
-                }catch (e:Exception){
-                    e.printStackTrace()
-                }
             }
+        })
+
+        fromPageViewModel.isFragmentUIUpdated().observe(this, Observer {
+            val itm = (context as MainActivity).businessProfileinp
+            try {
+                personalFragment.rootView.etPhone.setText(itm.number)
+                personalFragment.rootView.etEmail.setText(itm.email)
+                personalFragment.rootView.etWebsite.setText(itm.web_address)
+
+                businessFragment.rootView.etTitle.setText(itm.title)
+                businessFragment.rootView.tvOpenTime.text = itm.open_time
+                businessFragment.rootView.tvCloseTime.text = itm.close_time
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+
         })
     }
 
@@ -121,21 +126,11 @@ class FormFragment : Fragment() {
             transaction?.replace(rootView.flContainer.id, fragment)
             //transaction.addToBackStack(null)
 
+            Handler().postDelayed({
+                fromPageViewModel.setFragmentLoadState(true)
+            },1000)
+
             transaction?.commit()
-
-            try {
-                val itm = (context as MainActivity).businessProfileinp
-
-                personalFragment.rootView.etPhone.setText(itm.number)
-                personalFragment.rootView.etEmail.setText(itm.email)
-                personalFragment.rootView.etWebsite.setText(itm.web_address)
-
-                businessFragment.rootView.etTitle.setText(itm.title)
-                businessFragment.rootView.tvOpenTime.text = itm.open_time
-                businessFragment.rootView.tvCloseTime.text = itm.close_time
-            }catch (e:Exception){
-                e.printStackTrace()
-            }
         }catch (e:Exception){
             e.printStackTrace()
         }

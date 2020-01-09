@@ -78,6 +78,10 @@ if(isLocationEnabled()){
             }
         })
 
+        loginViewModel.onQRDetected().observe(this, Observer {
+            rootView.etTokenId.setText(it)
+        })
+
         rootView.etTokenId.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(s: Editable?) {
 
